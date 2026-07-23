@@ -12,7 +12,8 @@
     "build:vercel": "OUTPUT=vercel astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "audit:node24": "node scripts/audit-node24.mjs"
+    "audit:node24": "node scripts/audit-node24.mjs",
+    "audit:node24:evidence": "node scripts/audit-node24.mjs --evidence docs/node24-evidence.current.json"
   },
   "dependencies": {
     "@astrojs/node": "^5.0.4",
