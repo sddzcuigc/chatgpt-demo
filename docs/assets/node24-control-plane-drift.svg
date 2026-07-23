@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <rect width="1536" height="1024" fill="#f5f7fb"/>
+  <rect x="42" y="34" width="1452" height="92" rx="18" fill="#111827"/>
+  <text x="78" y="78" font-family="Arial" font-size="30" font-weight="700" fill="#ffffff">Node.js 24 四处一致门禁</text>
+  <text x="78" y="108" font-family="Arial" font-size="16" fill="#cbd5e1">仓库声明、本地实际、Vercel 控制面、构建日志必须同时为 24.x</text>
+
+  <g font-family="Arial">
+    <rect x="42" y="154" width="930" height="824" rx="18" fill="#ffffff" stroke="#d8e1ee"/>
+    <text x="76" y="202" font-size="22" font-weight="700" fill="#111827">一致性检查</text>
+
+    <g>
+      <rect x="76" y="236" width="404" height="160" rx="14" fill="#ecfdf5" stroke="#86efac"/>
+      <text x="102" y="276" font-size="18" font-weight="700" fill="#166534">1. 仓库声明</text>
+      <text x="102" y="314" font-size="15" fill="#166534">package.json: &gt;=24 &lt;25</text>
+      <text x="102" y="344" font-size="15" fill="#166534">.nvmrc / .node-version: 24</text>
+      <text x="102" y="374" font-size="15" fill="#166534">CI: actions/setup-node 24</text>
+    </g>
+
+    <g>
+      <rect x="510" y="236" width="404" height="160" rx="14" fill="#fff7ed" stroke="#fdba74"/>
+      <text x="536" y="276" font-size="18" font-weight="700" fill="#9a3412">2. 本地实际</text>
+      <text x="536" y="314" font-size="15" fill="#9a3412">必须由 Node 24 执行构建与测试</text>
+      <text x="536" y="344" font-size="15" fill="#9a3412">Node 22 结果不能作为最终验收</text>
+      <text x="536" y="374" font-size="15" fill="#9a3412">当前：待取得真实 Node 24 证据</text>
+    </g>
+
+    <g>
+      <rect x="76" y="428" width="404" height="160" rx="14" fill="#fef2f2" stroke="#fca5a5"/>
+      <text x="102" y="468" font-size="18" font-weight="700" fill="#991b1b">3. Vercel 控制面</text>
+      <text x="102" y="506" font-size="15" fill="#991b1b">Project Settings: 18.x</text>
+      <text x="102" y="536" font-size="15" fill="#991b1b">状态：阻断</text>
+      <text x="102" y="566" font-size="15" fill="#991b1b">必须人工改为 24.x</text>
+    </g>
+
+    <g>
+      <rect x="510" y="428" width="404" height="160" rx="14" fill="#ecfdf5" stroke="#86efac"/>
+      <text x="536" y="468" font-size="18" font-weight="700" fill="#166534">4. 构建日志</text>
+      <text x="536" y="506" font-size="15" fill="#166534">最近 Preview 实际使用 Node 24.x</text>
+      <text x="536" y="536" font-size="15" fill="#166534">READY，但由 engines.node 覆盖</text>
+      <text x="536" y="566" font-size="15" fill="#166534">不能替代控制面治理</text>
+    </g>
+
+    <rect x="76" y="628" width="838" height="134" rx="14" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="102" y="670" font-size="18" font-weight="700" fill="#1d4ed8">可执行门禁：npm run audit:node24</text>
+    <text x="102" y="706" font-size="15" fill="#1e3a8a">扫描 package.json、.nvmrc、.node-version、CI、Dockerfile 与 vercel.json</text>
+    <text x="102" y="736" font-size="15" fill="#1e3a8a">发现 Node 18/20/22 或实际运行时不是 24 时，CI 直接失败</text>
+
+    <rect x="76" y="802" width="838" height="132" rx="14" fill="#111827"/>
+    <text x="102" y="844" font-size="18" font-weight="700" fill="#ffffff">最终决策</text>
+    <text x="102" y="880" font-size="15" fill="#d1d5db">当前结论：迁移中，不允许合并基线 PR，不允许宣称治理完成</text>
+    <text x="102" y="910" font-size="15" fill="#d1d5db">下一步：Vercel Settings 改为 24.x → Redeploy → 重新读取设置与日志</text>
+
+    <rect x="1000" y="154" width="494" height="824" rx="18" fill="#ffffff" stroke="#d8e1ee"/>
+    <text x="1032" y="202" font-size="22" font-weight="700" fill="#111827">状态面板</text>
+
+    <rect x="1032" y="236" width="430" height="104" rx="14" fill="#f8fafc"/>
+    <text x="1058" y="274" font-size="14" fill="#64748b">仓库声明</text>
+    <text x="1058" y="314" font-size="28" font-weight="700" fill="#16a34a">24.x ✓</text>
+
+    <rect x="1032" y="360" width="430" height="104" rx="14" fill="#f8fafc"/>
+    <text x="1058" y="398" font-size="14" fill="#64748b">GitHub CI</text>
+    <text x="1058" y="438" font-size="28" font-weight="700" fill="#16a34a">24.x ✓</text>
+
+    <rect x="1032" y="484" width="430" height="104" rx="14" fill="#fff7ed"/>
+    <text x="1058" y="522" font-size="14" fill="#9a3412">本地实际</text>
+    <text x="1058" y="562" font-size="28" font-weight="700" fill="#ea580c">待验证</text>
+
+    <rect x="1032" y="608" width="430" height="104" rx="14" fill="#fef2f2"/>
+    <text x="1058" y="646" font-size="14" fill="#991b1b">Vercel Project Settings</text>
+    <text x="1058" y="686" font-size="28" font-weight="700" fill="#dc2626">18.x ✕</text>
+
+    <rect x="1032" y="732" width="430" height="104" rx="14" fill="#ecfdf5"/>
+    <text x="1058" y="770" font-size="14" fill="#166534">Vercel 构建日志</text>
+    <text x="1058" y="810" font-size="28" font-weight="700" fill="#16a34a">24.x ✓</text>
+
+    <rect x="1032" y="862" width="430" height="72" rx="14" fill="#fee2e2"/>
+    <text x="1058" y="908" font-size="18" font-weight="700" fill="#991b1b">整体：阻断，四处尚未一致</text>
+  </g>
+</svg>
