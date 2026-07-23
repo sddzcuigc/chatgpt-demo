@@ -1,0 +1,1 @@
+import fs from 'node:fs';fs.rmSync(new URL('../dist',import.meta.url),{recursive:true,force:true});fs.mkdirSync(new URL('../dist',import.meta.url),{recursive:true});fs.copyFileSync(new URL('../index.html',import.meta.url),new URL('../dist/index.html',import.meta.url));console.log('build passed');
