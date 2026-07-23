@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Runtime Compatibility Gate</title>
+<style>
+:root{font-family:Inter,system-ui,sans-serif;background:#f4f7fb;color:#172033}*{box-sizing:border-box}body{margin:0}.app{max-width:1080px;margin:auto;padding:22px}header{background:linear-gradient(135deg,#172554,#2563eb);color:#fff;border-radius:18px;padding:22px;margin-bottom:18px}h1{margin:0;font-size:29px}.sub{color:#dbeafe;margin-top:7px}.grid{display:grid;grid-template-columns:1fr 380px;gap:18px}.card{background:#fff;border:1px solid #dfe6f1;border-radius:16px;padding:18px;box-shadow:0 8px 28px rgba(20,35,70,.06)}label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}input,select,textarea{width:100%;padding:11px;border:1px solid #cfd8e6;border-radius:10px;background:#f8fafc}textarea{min-height:76px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}.primary{background:#2563eb;color:white}.ghost{background:#eef2ff;color:#3730a3}.status{padding:14px;border-radius:12px}.bad{background:#fef2f2;color:#991b1b}.mid{background:#fff7ed;color:#9a3412}.good{background:#ecfdf5;color:#166534}.list{display:grid;gap:9px;margin-top:12px}.item{border:1px solid #e5e7eb;border-radius:11px;padding:11px}.ok{color:#166534}.no{color:#b91c1c}.warn{color:#9a3412}small{color:#64748b}@media(max-width:760px){.app{padding:13px}.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}h1{font-size:23px}}
+</style></head>
+<body><div class="app">
+<header><h1>Runtime Compatibility Gate</h1><div class="sub">部署前先检查 Vercel Project 与代码仓库是否对 Node.js 24.x 达成一致</div></header>
+<div class="grid"><section class="card">
+<label>项目名称</label><input id="name" placeholder="例如：resource-slot-register">
+<div class="row"><div><label>Vercel Project Node.js</label><select id="project"><option>18.x</option><option>20.x</option><option selected>24.x</option></select></div><div><label>package.json engines.node</label><input id="engines" value=">=24 <25"></div></div>
+<div class="row"><div><label>.nvmrc</label><input id="nvmrc" placeholder="24 或留空"></div><div><label>.node-version</label><input id="nodeversion" placeholder="24 或留空"></div></div>
+<label>vercel.json 中的运行时声明</label><textarea id="vercel" placeholder="无冲突可留空"></textarea>
+<label>最近一次构建错误</label><textarea id="error" placeholder="粘贴错误，例如 Found invalid or discontinued Node.js Version: 18.x"></textarea>
+<label>人工接管步骤</label><textarea id="handoff" value=""></textarea>
+<div class="actions"><button class="primary" id="check">执行兼容性检查</button><button class="ghost" id="sample">载入错误示例</button><button class="ghost" id="save">保存记录</button><button class="ghost" id="export">导出 Markdown</button></div>
+</section><aside><div class="card"><div id="status" class="status bad"><b>尚未检查</b><div>先填写项目与运行时配置。</div></div><div id="checks" class="list"></div></div><div class="card" style="margin-top:18px"><b>最近记录</b><div id="records" class="list"></div></div></aside></div></div>
+<script>
+const $=id=>document.getElementById(id);const ids=['name','project','engines','nvmrc','nodeversion','vercel','error','handoff'];
+function norm(v){return String(v||'').trim().toLowerCase()}
+function has24(v){v=norm(v);return !v||v.includes('24')}
+function calc(){const d=Object.fromEntries(ids.map(i=>[i,$(i).value.trim()]));const checks=[
+{ok:d.project==='24.x',label:`Vercel Project Node.js = ${d.project}`},
+{ok:has24(d.engines)&&!norm(d.engines).includes('18'),label:`package.json engines.node：${d.engines||'未声明'}`},
+{ok:has24(d.nvmrc)&&!norm(d.nvmrc).includes('18'),label:`.nvmrc：${d.nvmrc||'未设置'}`},
+{ok:has24(d.nodeversion)&&!norm(d.nodeversion).includes('18'),label:`.node-version：${d.nodeversion||'未设置'}`},
+{ok:!norm(d.vercel).includes('18')&&!norm(d.vercel).includes('20.x'),label:'vercel.json 无旧运行时冲突'},
+{ok:!norm(d.error).includes('discontinued')&&!norm(d.error).includes('18.x'),label:'最近构建日志不再出现旧 Node 版本错误'}];
+const pass=checks.every(x=>x.ok);const projectOnly=!checks[0].ok&&checks.slice(1,5).every(x=>x.ok);$('checks').innerHTML=checks.map(x=>`<div class="item ${x.ok?'ok':'no'}">${x.ok?'✓':'✕'} ${x.label}</div>`).join('');$('status').className='status '+(pass?'good':projectOnly?'mid':'bad');$('status').innerHTML=pass?'<b>可以部署</b><div>Project 与仓库配置均符合 Node.js 24.x。</div>':projectOnly?'<b>只需修改 Vercel Project</b><div>代码配置已兼容，先把 Project Settings 改为 24.x，再 Redeploy。</div>':'<b>禁止部署</b><div>仓库或 Project 仍声明旧版本，继续部署只会重复失败。</div>';
+const result={...d,checks,pass,time:new Date().toISOString()};localStorage.setItem('runtime-last',JSON.stringify(result));return result}
+function records(){return JSON.parse(localStorage.getItem('runtime-records')||'[]')}function render(){const r=records();$('records').innerHTML=r.length?r.map(x=>`<div class="item"><b>${x.name||'未命名'}</b><div><small>${x.time.slice(0,16).replace('T',' ')}｜${x.pass?'通过':'阻断'}</small></div></div>`).join(''):'<small>暂无记录</small>'}
+$('check').onclick=calc;$('sample').onclick=()=>{$('name').value='空闲 Vercel Project';$('project').value='18.x';$('engines').value='>=24 <25';$('nvmrc').value='24';$('nodeversion').value='';$('vercel').value='';$('error').value='Found invalid or discontinued Node.js Version: "18.x"';$('handoff').value='Project → Settings → General → Node.js Version → 24.x → Save → Redeploy';calc()};$('save').onclick=()=>{const x=calc();let r=records();r.unshift(x);localStorage.setItem('runtime-records',JSON.stringify(r.slice(0,20)));render()};$('export').onclick=()=>{const x=calc();let md=`# Runtime Compatibility Gate\n\n- 项目：${x.name}\n- Vercel Node.js：${x.project}\n- engines.node：${x.engines}\n- .nvmrc：${x.nvmrc||'未设置'}\n- .node-version：${x.nodeversion||'未设置'}\n- 结果：${x.pass?'通过':'阻断'}\n\n## 检查项\n${x.checks.map(c=>`- [${c.ok?'x':' '}] ${c.label}`).join('\n')}\n\n## 人工接管\n${x.handoff}\n`;let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'}));a.download='runtime-compatibility.md';a.click();URL.revokeObjectURL(a.href)};render();const saved=localStorage.getItem('runtime-last');if(saved){const x=JSON.parse(saved);ids.forEach(i=>$(i).value=x[i]||'');calc()}
+</script></body></html>
