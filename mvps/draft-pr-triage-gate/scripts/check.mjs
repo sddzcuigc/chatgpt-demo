@@ -1,0 +1,1 @@
+import fs from 'node:fs';const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');for(const s of ['Draft PR Triage Gate','执行分诊','localStorage']){if(!html.includes(s))throw new Error('missing '+s)}console.log('static check passed');
