@@ -11,7 +11,8 @@
     "build": "astro build",
     "build:vercel": "OUTPUT=vercel astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:node24": "node scripts/audit-node24.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^5.0.4",
@@ -21,14 +22,14 @@
     "astro": "^2.0.15",
     "eventsource-parser": "^0.1.0",
     "highlight.js": "^11.7.0",
-    "js-sha256": "^0.9.0",
+    "js-sha256": "^9.0.0",
     "katex": "^0.6.0",
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-katex": "^2.0.3",
     "solid-js": "^1.6.11",
-    "solidjs-use": "^1.2.0",
+    "solidjs-use": "^0.6.11",
     "undici": "^5.20.0"
   },
   "devDependencies": {
