@@ -15,4 +15,5 @@ jobs:
           node-version: '24'
       - run: node --version
       - run: npm install
+      - run: npm run audit:node24
       - run: npm run build
