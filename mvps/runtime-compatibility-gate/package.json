@@ -1,0 +1,12 @@
+{
+  "name": "runtime-compatibility-gate",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('Static MVP: no build step required')\"",
+    "check": "node -e \"const p=require('./package.json'); if(!p.engines.node.includes('24')) process.exit(1); console.log('Node 24 declaration OK')\""
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}
