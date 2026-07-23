@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<rect width="1536" height="1024" fill="#f6f8fb"/>
+<rect x="48" y="40" width="1440" height="110" rx="22" fill="#111827"/>
+<text x="86" y="88" font-family="Arial" font-size="34" font-weight="700" fill="#fff">Node.js 24 统一基线</text>
+<text x="86" y="125" font-family="Arial" font-size="18" fill="#cbd5e1">仓库声明、本地版本、CI、Vercel 设置与构建日志必须四处一致</text>
+<g font-family="Arial">
+<rect x="48" y="182" width="930" height="780" rx="22" fill="#fff" stroke="#d8e0eb"/>
+<text x="84" y="232" font-size="24" font-weight="700" fill="#111827">一致性检查链</text>
+<g>
+<rect x="84" y="270" width="820" height="92" rx="16" fill="#eef6ff" stroke="#9ec5fe"/>
+<text x="112" y="307" font-size="19" font-weight="700" fill="#174ea6">1. 仓库声明</text>
+<text x="112" y="338" font-size="17" fill="#334155">package.json: &gt;=24 &lt;25　　.nvmrc: 24　　.node-version: 24</text>
+</g>
+<g>
+<rect x="84" y="390" width="820" height="92" rx="16" fill="#ecfdf5" stroke="#86efac"/>
+<text x="112" y="427" font-size="19" font-weight="700" fill="#166534">2. CI 验证</text>
+<text x="112" y="458" font-size="17" fill="#334155">GitHub Actions 使用 Node 24，执行 npm ci 与 npm run build</text>
+</g>
+<g>
+<rect x="84" y="510" width="820" height="92" rx="16" fill="#fff7ed" stroke="#fdba74"/>
+<text x="112" y="547" font-size="19" font-weight="700" fill="#9a3412">3. Vercel Project</text>
+<text x="112" y="578" font-size="17" fill="#334155">Settings → General → Node.js Version 必须为 24.x</text>
+</g>
+<g>
+<rect x="84" y="630" width="820" height="92" rx="16" fill="#fef2f2" stroke="#fca5a5"/>
+<text x="112" y="667" font-size="19" font-weight="700" fill="#991b1b">4. 构建日志</text>
+<text x="112" y="698" font-size="17" fill="#334155">新部署日志必须显示 v24.x；旧部署结果不得冒充验收</text>
+</g>
+<rect x="84" y="766" width="820" height="136" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="112" y="808" font-size="20" font-weight="700" fill="#111827">完成判定</text>
+<text x="112" y="846" font-size="18" fill="#334155">四处全部为 Node.js 24.x，且构建通过，才允许标记迁移完成。</text>
+<text x="112" y="878" font-size="18" fill="#334155">任一位置仍是 18 / 20 / 22：阻断部署，记录人工接管步骤。</text>
+<rect x="1010" y="182" width="478" height="780" rx="22" fill="#fff" stroke="#d8e0eb"/>
+<text x="1046" y="232" font-size="24" font-weight="700" fill="#111827">本轮状态</text>
+<rect x="1046" y="270" width="406" height="92" rx="16" fill="#ecfdf5"/>
+<text x="1074" y="310" font-size="18" font-weight="700" fill="#166534">仓库声明：已完成</text>
+<text x="1074" y="340" font-size="16" fill="#166534">package.json / .nvmrc / .node-version</text>
+<rect x="1046" y="386" width="406" height="92" rx="16" fill="#ecfdf5"/>
+<text x="1074" y="426" font-size="18" font-weight="700" fill="#166534">CI：已完成</text>
+<text x="1074" y="456" font-size="16" fill="#166534">actions/setup-node@v4，node-version: 24</text>
+<rect x="1046" y="502" width="406" height="112" rx="16" fill="#fff7ed"/>
+<text x="1074" y="542" font-size="18" font-weight="700" fill="#9a3412">Vercel：阻塞</text>
+<text x="1074" y="572" font-size="16" fill="#9a3412">chatgpt-demo 当前仍为 Node 18.x</text>
+<text x="1074" y="596" font-size="16" fill="#9a3412">必须人工改为 24.x 后重新部署</text>
+<rect x="1046" y="638" width="406" height="112" rx="16" fill="#fef2f2"/>
+<text x="1074" y="678" font-size="18" font-weight="700" fill="#991b1b">最终验收：未通过</text>
+<text x="1074" y="708" font-size="16" fill="#991b1b">缺 Vercel 24.x 与新构建日志证据</text>
+<rect x="1046" y="790" width="406" height="112" rx="16" fill="#eff6ff"/>
+<text x="1074" y="830" font-size="18" font-weight="700" fill="#1d4ed8">人工步骤</text>
+<text x="1074" y="860" font-size="15" fill="#1e3a8a">Project → Settings → General</text>
+<text x="1074" y="886" font-size="15" fill="#1e3a8a">Node.js Version → 24.x → Save → Redeploy</text>
+</g>
+</svg>
