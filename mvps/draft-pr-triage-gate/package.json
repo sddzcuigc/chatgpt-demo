@@ -1,0 +1,1 @@
+{"name":"draft-pr-triage-gate","version":"0.1.0","private":true,"engines":{"node":">=24 <25"},"scripts":{"check":"node scripts/check.mjs","build":"node scripts/build.mjs"}}
