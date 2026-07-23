@@ -1,0 +1,1 @@
+{"name":"artifact-access-gate","version":"1.0.0","private":true,"scripts":{"build":"node -e \"require('fs').accessSync('index.html'); console.log('static build ok')\"","check":"node -e \"const fs=require('fs');const s=fs.readFileSync('index.html','utf8');if(!s.includes('制品可获得性门禁'))process.exit(1);console.log('check ok')\""},"engines":{"node":">=24 <25"}}
