@@ -13,7 +13,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "audit:node24": "node scripts/audit-node24.mjs",
-    "audit:node24:evidence": "node scripts/audit-node24.mjs --evidence docs/node24-evidence.current.json"
+    "audit:node24:evidence": "node scripts/audit-node24.mjs --evidence docs/node24-evidence.current.json",
+    "proof:node24:local": "sh scripts/node24-local-proof.sh"
   },
   "dependencies": {
     "@astrojs/node": "^5.0.4",
