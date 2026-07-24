@@ -1,3 +1,3 @@
 {
-  "buildCommand": "OUTPUT=vercel astro build"
+  "buildCommand": "node --version && OUTPUT=vercel astro build"
 }

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <rect width="1536" height="1024" fill="#f6f8fb"/>
+  <rect x="48" y="38" width="1440" height="92" rx="18" fill="#0f172a"/>
+  <text x="82" y="80" font-family="Arial" font-size="30" font-weight="700" fill="#fff">Node.js 24 四信号证据门</text>
+  <text x="82" y="110" font-family="Arial" font-size="17" fill="#cbd5e1">仓库声明、本地实际、Vercel Project 设置、构建日志必须同时为 24.x</text>
+  <g font-family="Arial">
+    <rect x="48" y="160" width="930" height="810" rx="20" fill="#fff" stroke="#d9e2ef"/>
+    <text x="82" y="210" font-size="23" font-weight="700" fill="#111827">当前证据</text>
+    <rect x="82" y="246" width="404" height="150" rx="15" fill="#ecfdf5" stroke="#86efac"/>
+    <text x="108" y="286" font-size="18" font-weight="700" fill="#166534">1. 仓库声明</text>
+    <text x="108" y="326" font-size="16" fill="#166534">package.json / .nvmrc / CI</text>
+    <text x="108" y="362" font-size="28" font-weight="700" fill="#15803d">24.x ✓</text>
+    <rect x="518" y="246" width="404" height="150" rx="15" fill="#fff7ed" stroke="#fdba74"/>
+    <text x="544" y="286" font-size="18" font-weight="700" fill="#9a3412">2. 本地实际</text>
+    <text x="544" y="326" font-size="16" fill="#9a3412">尚无 Node 24 本地构建证据</text>
+    <text x="544" y="362" font-size="28" font-weight="700" fill="#c2410c">待验证</text>
+    <rect x="82" y="430" width="404" height="150" rx="15" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="108" y="470" font-size="18" font-weight="700" fill="#991b1b">3. Vercel Project</text>
+    <text x="108" y="510" font-size="16" fill="#991b1b">控制面仍保存旧版本</text>
+    <text x="108" y="546" font-size="28" font-weight="700" fill="#b91c1c">18.x ✕</text>
+    <rect x="518" y="430" width="404" height="150" rx="15" fill="#ecfdf5" stroke="#86efac"/>
+    <text x="544" y="470" font-size="18" font-weight="700" fill="#166534">4. 构建日志</text>
+    <text x="544" y="510" font-size="16" fill="#166534">最新 Preview 实际运行</text>
+    <text x="544" y="546" font-size="28" font-weight="700" fill="#15803d">24.x ✓</text>
+    <rect x="82" y="620" width="840" height="126" rx="16" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="108" y="662" font-size="19" font-weight="700" fill="#1d4ed8">自动门禁命令</text>
+    <text x="108" y="704" font-size="18" fill="#1e3a8a">npm run audit:node24:evidence</text>
+    <text x="108" y="732" font-size="15" fill="#1e3a8a">任一信号不是 24.x，命令退出失败，不允许合并或标记完成。</text>
+    <rect x="82" y="782" width="840" height="142" rx="16" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="108" y="824" font-size="19" font-weight="700" fill="#111827">人工接管</text>
+    <text x="108" y="862" font-size="16" fill="#334155">Vercel → chatgpt-demo → Settings → General → Node.js Version → 24.x</text>
+    <text x="108" y="896" font-size="16" fill="#334155">保存并重新部署，再更新 evidence JSON 后重新执行门禁。</text>
+    <rect x="1010" y="160" width="478" height="810" rx="20" fill="#fff" stroke="#d9e2ef"/>
+    <text x="1044" y="210" font-size="23" font-weight="700" fill="#111827">决策状态</text>
+    <rect x="1044" y="248" width="410" height="130" rx="16" fill="#fef2f2"/>
+    <text x="1072" y="296" font-size="26" font-weight="700" fill="#991b1b">阻断</text>
+    <text x="1072" y="334" font-size="16" fill="#991b1b">Vercel 控制面 18.x</text>
+    <rect x="1044" y="414" width="410" height="170" rx="16" fill="#fff7ed"/>
+    <text x="1072" y="458" font-size="19" font-weight="700" fill="#9a3412">还缺两项</text>
+    <text x="1072" y="500" font-size="16" fill="#9a3412">• Vercel Project 改为 24.x</text>
+    <text x="1072" y="536" font-size="16" fill="#9a3412">• 本地 Node 24 构建证据</text>
+    <rect x="1044" y="620" width="410" height="190" rx="16" fill="#ecfdf5"/>
+    <text x="1072" y="664" font-size="19" font-weight="700" fill="#166534">通过条件</text>
+    <text x="1072" y="708" font-size="16" fill="#166534">四个信号全部为 24.x</text>
+    <text x="1072" y="744" font-size="16" fill="#166534">新部署 READY</text>
+    <text x="1072" y="780" font-size="16" fill="#166534">证据文件包含部署 ID 与时间</text>
+  </g>
+</svg>

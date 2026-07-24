@@ -1,0 +1,15 @@
+{
+  "repositoryDeclaration": "24.x",
+  "localRuntime": null,
+  "vercelProjectSetting": "24.x",
+  "vercelBuildRuntime": "24.x",
+  "deploymentId": "dpl_9N8eawtzQjXGJEjmHHjcFbJtW8TK",
+  "deploymentUrl": "https://chatgpt-demo-6g3so397u-sddzcuigcs-projects.vercel.app",
+  "checkedAt": "2026-07-24T19:05:00+08:00",
+  "status": "blocked",
+  "blockers": [
+    "No local Node.js 24 runtime build evidence is available",
+    "A fresh deployment after the Vercel Project Settings change is still required"
+  ],
+  "manualHandoff": "Run the project locally with Node.js 24, then execute npm install && npm run audit:node24 && npm run build; after the new Vercel deployment is READY, update this evidence file with the new deployment ID and URL."
+}

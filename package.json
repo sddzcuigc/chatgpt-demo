@@ -2,13 +2,19 @@
   "name": "novel-gpt",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "build:vercel": "OUTPUT=vercel astro build",
+    "build": "node --version && astro build",
+    "build:vercel": "node --version && OUTPUT=vercel astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:node24": "node scripts/audit-node24.mjs",
+    "audit:node24:evidence": "node scripts/audit-node24.mjs --evidence docs/node24-evidence.current.json",
+    "proof:node24:local": "sh scripts/node24-local-proof.sh"
   },
   "dependencies": {
     "@astrojs/node": "^5.0.4",

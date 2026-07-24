@@ -1,0 +1,11 @@
+FROM node:24.4.0-bookworm-slim
+
+WORKDIR /workspace
+
+COPY package.json pnpm-lock.yaml* package-lock.json* .npmrc* ./
+
+RUN corepack enable
+
+COPY . .
+
+CMD ["sh", "-lc", "node --version && npm install && npm run audit:node24 && npm run build && npm run audit:node24:evidence"]
