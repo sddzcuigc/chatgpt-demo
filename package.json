@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "build:vercel": "OUTPUT=vercel astro build",
+    "build": "node --version && astro build",
+    "build:vercel": "node --version && OUTPUT=vercel astro build",
     "preview": "astro preview",
     "astro": "astro",
     "audit:node24": "node scripts/audit-node24.mjs",
